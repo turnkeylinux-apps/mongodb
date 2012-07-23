@@ -1,0 +1,8 @@
+#!/bin/sh -ex
+
+# mongodb: fails in root.build
+apt-get -f install
+
+# mongodb: stop service (started with apt-get -f)
+/etc/init.d/mongodb stop
+
