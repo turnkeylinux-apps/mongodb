@@ -5,3 +5,6 @@ mongodb
 python-pymongo
 ipython
 
+lighttpd
+php5-cgi
+
