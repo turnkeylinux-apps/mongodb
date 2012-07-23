@@ -1,8 +1,19 @@
 #!/bin/sh -ex
 
+ADMIN_NAME=admin
+ADMIN_PASS=turnkey
+
 # mongodb: fails in root.build
 apt-get -f install
 
+# mongodb: create admin user before enabling auth
+/usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS" --current-pass=""
+
 # mongodb: stop service (started with apt-get -f)
 /etc/init.d/mongodb stop
+
+# mongodb: enable auth and bind to all interfaces
+CONF=/etc/mongodb.conf
+sed -i "s|^#auth.*|auth = true|" $CONF
+sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 
