@@ -3,6 +3,8 @@
 ADMIN_NAME=admin
 ADMIN_PASS=turnkey
 
+SRC=/usr/local/src
+
 # mongodb: fails in root.build
 apt-get -f install
 
@@ -16,4 +18,9 @@ apt-get -f install
 CONF=/etc/mongodb.conf
 sed -i "s|^#auth.*|auth = true|" $CONF
 sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
+
+# mongo-php: install prebuilt driver
+cp $SRC/mongo-php/mongo.so /usr/lib/php5/20090626+lfs/
+cp $SRC/mongo-php/mongo.ini /etc/php5/conf.d/
+rm -rf $SRC/mongo-php
 
