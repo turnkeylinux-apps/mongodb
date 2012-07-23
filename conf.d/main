@@ -4,6 +4,7 @@ ADMIN_NAME=admin
 ADMIN_PASS=turnkey
 
 SRC=/usr/local/src
+WEBROOT=/var/www/rockmongo
 
 # mongodb: fails in root.build
 apt-get -f install
@@ -23,4 +24,27 @@ sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 cp $SRC/mongo-php/mongo.so /usr/lib/php5/20090626+lfs/
 cp $SRC/mongo-php/mongo.ini /etc/php5/conf.d/
 rm -rf $SRC/mongo-php
+
+# rockmongo: unpack + plugins, configure, and enable in lighttpd
+unzip $SRC/rockmongo-*.zip -d $(dirname $WEBROOT)
+unzip $SRC/mapreduce-*.zip -d $WEBROOT/app/plugins
+unzip $SRC/sharding-*.zip -d $WEBROOT/app/plugins
+rm $SRC/rockmongo-*.zip
+rm $SRC/mapreduce-*.zip
+rm $SRC/sharding-*.zip
+
+CONF=$WEBROOT/config.php
+sed -i "s|\[\"mongo_auth\"\].*|[\"mongo_auth\"] = true;|" $CONF
+
+cat >$WEBROOT/app/configs/rplugin.php<<EOF
+<?php
+\$plugins["mapreduce"]["enabled"] = 1;
+\$plugins["sharding"]["enabled"] = 1;
+?>
+EOF
+
+chown -R root:root $WEBROOT
+
+lighty-disable-mod ssl
+lighty-enable-mod rockmongo
 
