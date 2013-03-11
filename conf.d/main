@@ -29,9 +29,11 @@ rm -rf $SRC/mongo-php
 unzip $SRC/rockmongo-*.zip -d $(dirname $WEBROOT)
 unzip $SRC/mapreduce-*.zip -d $WEBROOT/app/plugins
 unzip $SRC/sharding-*.zip -d $WEBROOT/app/plugins
+unzip $SRC/systemjs-*.zip -d $WEBROOT/app/plugins
 rm $SRC/rockmongo-*.zip
 rm $SRC/mapreduce-*.zip
 rm $SRC/sharding-*.zip
+rm $SRC/systemjs-*.zip
 
 CONF=$WEBROOT/config.php
 sed -i "s|\[\"mongo_auth\"\].*|[\"mongo_auth\"] = true;|" $CONF
@@ -40,6 +42,7 @@ cat >$WEBROOT/app/configs/rplugin.php<<EOF
 <?php
 \$plugins["mapreduce"]["enabled"] = 1;
 \$plugins["sharding"]["enabled"] = 1;
+\$plugins["systemjs"]["enabled"] = 1;
 ?>
 EOF
 

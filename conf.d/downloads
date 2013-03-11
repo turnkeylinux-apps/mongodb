@@ -1,0 +1,12 @@
+#!/bin/bash -ex
+
+dl() {
+    [ "$FAB_HTTP_PROXY" ] && PROXY="--proxy $FAB_HTTP_PROXY"
+    cd $2; curl -L -f -O $PROXY $1; cd -
+}
+
+dl http://rockmongo.com/release/rockmongo-1.1.5.zip /usr/local/src
+dl http://rock-php.googlecode.com/files/mapreduce-v1.0.0.zip /usr/local/src
+dl http://rock-php.googlecode.com/files/sharding-v1.0.0.zip /usr/local/src
+dl http://rock-php.googlecode.com/files/systemjs-v1.0.0.zip /usr/local/src
+
