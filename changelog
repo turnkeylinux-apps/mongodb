@@ -2,16 +2,15 @@ turnkey-mongodb-12.1 (1) turnkey; urgency=low
 
   * MongoDB:
 
-    - Upgraded to latest version of RockMongo.
+    - Compile and install latest version of mongo-php-driver (github).
+    - Upgraded to latest version of RockMongo (github).
     - Added RockMongo systemjs plugin.
 
   * Hardcoded component versions:
 
-    rockmongo           1.1.5
     mapreduce           1.0.0
     sharding            1.0.0
     systemjs            1.0.0
-    mongo-php driver    Downloaded 23-07-2012
 
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
