@@ -6,7 +6,7 @@ turnkey-mongodb-12.1 (1) turnkey; urgency=low
     - Upgraded to latest version of RockMongo (github).
     - Added RockMongo systemjs plugin.
 
-  * Hardcoded component versions:
+  * Upstream source component versions:
 
     mapreduce           1.0.0
     sharding            1.0.0
