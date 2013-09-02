@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/bash -ex
 
 ADMIN_NAME=admin
 ADMIN_PASS=turnkey
@@ -6,13 +6,13 @@ ADMIN_PASS=turnkey
 SRC=/usr/local/src
 WEBROOT=/var/www/rockmongo
 
-# mongodb: fails in root.build
-apt-get -f install
+# mongodb: start service
+/etc/init.d/mongodb start
 
 # mongodb: create admin user before enabling auth
 /usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS" --current-pass=""
 
-# mongodb: stop service (started with apt-get -f)
+# mongodb: stop service
 /etc/init.d/mongodb stop
 
 # mongodb: enable auth and bind to all interfaces
