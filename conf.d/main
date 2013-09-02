@@ -6,8 +6,13 @@ ADMIN_PASS=turnkey
 SRC=/usr/local/src
 WEBROOT=/var/www/rockmongo
 
-# mongodb: start service
+# mongodb: start service and wait until completely initialized
 /etc/init.d/mongodb start
+
+while true; do
+    grep -q "connections on port 27017" /var/log/mongodb/mongodb.log && break
+    sleep 3
+done
 
 # mongodb: create admin user before enabling auth
 /usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS" --current-pass=""
