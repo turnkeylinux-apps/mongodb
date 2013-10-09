@@ -8,6 +8,7 @@ Option:
 """
 
 import sys
+import time
 import getopt
 import pymongo
 
@@ -27,13 +28,26 @@ class MongoDB:
             self._start()
             self.selfstarted = True
 
-        self.conn = pymongo.Connection()
+        self.conn = self._connect()
         self.db = self.conn[dbname]
 
         if cur_pass:
             auth = self.db.authenticate(self.username, cur_pass)
             if not auth:
                 raise MongoDBError("Authentication failed for %s account" % username)
+
+    @staticmethod
+    def _connect(max_attempts=20, sleep=3):
+        attempt = 0
+        while True:
+            attempt += 1
+            try:
+                conn = pymongo.Connection()
+                return conn
+            except:
+                time.sleep(sleep)
+                if attempt >= max_attempts:
+                    raise MongoDBError("Exhausted connection attempts")
 
     def _is_alive(self):
         try:
