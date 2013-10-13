@@ -37,7 +37,7 @@ class MongoDB:
                 raise MongoDBError("Authentication failed for %s account" % username)
 
     @staticmethod
-    def _connect(max_attempts=20, sleep=3):
+    def _connect(max_attempts=30, sleep=6):
         attempt = 0
         while True:
             attempt += 1
@@ -45,9 +45,9 @@ class MongoDB:
                 conn = pymongo.Connection()
                 return conn
             except:
-                time.sleep(sleep)
                 if attempt >= max_attempts:
                     raise MongoDBError("Exhausted connection attempts")
+                time.sleep(sleep)
 
     def _is_alive(self):
         try:
