@@ -19,7 +19,8 @@ cd $SRC/mongo-php-driver
 phpize
 ./configure
 make install
-echo "extension=mongo.so" > /etc/php5/conf.d/mongo.ini
+echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini
+php5enmod mongo
 cd /; rm -rf $SRC/mongo-php-driver
 
 # rockmongo: plugins, configure, and enable in lighttpd
@@ -43,6 +44,8 @@ EOF
 
 chown -R root:root $WEBROOT
 
+lighty-enable-mod fastcgi
+lighty-enable-mod fastcgi-php
 lighty-disable-mod ssl
 lighty-enable-mod rockmongo
 

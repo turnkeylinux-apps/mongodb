@@ -1,3 +1,15 @@
+turnkey-mongodb-14.0 (1) turnkey; urgency=low
+
+  * MongoDB:
+
+     - Latest Debian Jessie package version of MongoDB.
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Jeremy Davis <jeremy@turnkeylinux.org>  Mon, 15 Jun 2015 15:12:47 +1000
+
+
 turnkey-mongodb-13.0 (1) turnkey; urgency=low
 
   * MongoDB:
