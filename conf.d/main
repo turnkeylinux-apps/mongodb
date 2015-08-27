@@ -44,8 +44,8 @@ EOF
 
 chown -R root:root $WEBROOT
 
-lighty-enable-mod fastcgi
-lighty-enable-mod fastcgi-php
-lighty-disable-mod ssl
+lighty-enable-mod fastcgi || true
+lighty-enable-mod fastcgi-php || true
+lighty-disable-mod ssl || true
 lighty-enable-mod rockmongo
 
