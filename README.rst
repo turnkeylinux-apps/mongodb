@@ -36,4 +36,4 @@ Credentials *(passwords set at first boot)*
 
 
 .. _MongoDB: http://www.mongodb.org/
-.. _TurnKey Core: http://www.turnkeylinux.org/core
+.. _TurnKey Core: https://www.turnkeylinux.org/core
