@@ -1,13 +1,13 @@
 #!/bin/bash -ex
 
 ADMIN_NAME=admin
-ADMIN_PASS=turnkey
+ADMIN_PASS=$(mcookie)
 
 SRC=/usr/local/src
 WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
-/usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS" --current-pass=""
+/usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS"
 
 # mongodb: enable auth and bind to all interfaces
 CONF=/etc/mongodb.conf
