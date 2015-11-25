@@ -14,15 +14,6 @@ CONF=/etc/mongodb.conf
 sed -i "s|^#auth.*|auth = true|" $CONF
 sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 
-# mongo-php: build and install driver
-cd $SRC/mongo-php-driver
-phpize
-./configure
-make install
-echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini
-php5enmod mongo
-cd /; rm -rf $SRC/mongo-php-driver
-
 # rockmongo: plugins, configure, and enable in lighttpd
 unzip $SRC/mapreduce-*.zip -d $WEBROOT/app/plugins
 unzip $SRC/sharding-*.zip -d $WEBROOT/app/plugins

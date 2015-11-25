@@ -2,11 +2,11 @@
 
 mongodb
 
+php5-mongo
+
 python-pymongo
 ipython
 
 lighttpd
 php5-cgi
 
-build-essential
-php5-dev
