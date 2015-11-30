@@ -4,5 +4,5 @@
 . /etc/default/inithooks
 
 [ -e $INITHOOKS_CONF ] && . $INITHOOKS_CONF
-$INITHOOKS_PATH/bin/mongodb.py --pass="$APP_PASS" --current-pass="turnkey"
+$INITHOOKS_PATH/bin/mongodb.py --pass="$APP_PASS"
 

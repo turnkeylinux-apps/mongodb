@@ -1,27 +1,21 @@
 #!/bin/bash -ex
 
 ADMIN_NAME=admin
-ADMIN_PASS=turnkey
+ADMIN_PASS=$(mcookie)
 
 SRC=/usr/local/src
 WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
-/usr/lib/inithooks/bin/mongodb.py --pass="$ADMIN_PASS" --current-pass=""
+/etc/init.d/mongodb start
+sleep 10
+mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
+/etc/init.d/mongodb stop
 
 # mongodb: enable auth and bind to all interfaces
 CONF=/etc/mongodb.conf
 sed -i "s|^#auth.*|auth = true|" $CONF
 sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
-
-# mongo-php: build and install driver
-cd $SRC/mongo-php-driver
-phpize
-./configure
-make install
-echo "extension=mongo.so" > /etc/php5/mods-available/mongo.ini
-php5enmod mongo
-cd /; rm -rf $SRC/mongo-php-driver
 
 # rockmongo: plugins, configure, and enable in lighttpd
 unzip $SRC/mapreduce-*.zip -d $WEBROOT/app/plugins

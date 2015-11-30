@@ -14,7 +14,6 @@ and on top of that:
    
    - MongoDB installed and maintained through the package management
      system (mongodb package).
-   - Installed from upstream source code to /var/www/mongodb.
    - Configured with auth enabled (security).
    - Configured to bind to all network interfaces (convenience).
    - Includes MongoDB PHP bindings.

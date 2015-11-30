@@ -11,6 +11,5 @@ dl http://rock-php.googlecode.com/files/systemjs-v1.0.0.zip /usr/local/src
 
 [ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY
 git clone https://github.com/iwind/rockmongo.git /var/www/rockmongo
-git clone https://github.com/mongodb/mongo-php-driver /usr/local/src/mongo-php-driver
 unset HTTP_PROXY
 
