@@ -5,11 +5,17 @@ dl() {
     cd $2; curl -L -f -O $PROXY $1; cd -
 }
 
-dl http://rock-php.googlecode.com/files/mapreduce-v1.0.0.zip /usr/local/src
-dl http://rock-php.googlecode.com/files/sharding-v1.0.0.zip /usr/local/src
-dl http://rock-php.googlecode.com/files/systemjs-v1.0.0.zip /usr/local/src
-
 [ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY
-git clone https://github.com/iwind/rockmongo.git /var/www/rockmongo
+
+WEBROOT=/var/www/rockmongo
+
+git clone https://github.com/iwind/rockmongo.git $WEBROOT
+
+# ensure empty directory for git-clone
+rm -f $WEBROOT/app/plugins/README.txt
+
+git clone https://github.com/iwind/rockmongoplugins.git /var/www/rockmongo/app/plugins
+git clone https://github.com/mongodb/mongo-php-driver /usr/local/src/mongo-php-driver
+
 unset HTTP_PROXY
 
