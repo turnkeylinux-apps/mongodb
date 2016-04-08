@@ -8,7 +8,7 @@ WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
 /etc/init.d/mongodb start
-sleep 10
+sleep 60
 mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
 /etc/init.d/mongodb stop
 
