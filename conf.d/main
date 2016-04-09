@@ -10,7 +10,7 @@ WEBROOT=/var/www/rockmongo
 /etc/init.d/mongodb start
 # wait for mongdb to start
 MONGO_PORT=27017
-CURL="curl --output /dev/null --silent --head --fail"
+CURL="curl --output /dev/null --silent"
 until $($CURL http://127.0.0.1:$MONGO_PORT); do
     sleep 5
 done
