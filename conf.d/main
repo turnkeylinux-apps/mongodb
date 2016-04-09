@@ -8,7 +8,12 @@ WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
 /etc/init.d/mongodb start
-sleep 60
+# wait for mongdb to start
+MONGO_PORT=27017
+CURL="curl --output /dev/null --silent --head --fail"
+until $($CURL http://127.0.0.1:$MONGO_PORT); do
+    sleep 5
+done
 mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
 /etc/init.d/mongodb stop
 
