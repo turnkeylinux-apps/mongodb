@@ -7,22 +7,34 @@ SRC=/usr/local/src
 WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
-/etc/init.d/mongodb start
+service mongodb start
 # wait for mongdb to start
 MONGO_PORT=27017
 CURL="curl --output /dev/null --silent"
 until $($CURL http://127.0.0.1:$MONGO_PORT); do
     sleep 5
 done
-mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
-/etc/init.d/mongodb stop
+
+read -d '' user_doc << EOF || true
+db.createUser({
+    user: "admin",
+    pwd: "$ADMIN_PASS",
+    roles: [
+        { role: "userAdminAnyDatabase", db: "admin" }
+    ]
+})
+EOF
+
+#mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
+mongo admin --eval "$user_doc"
+service mongodb stop
 
 # mongodb: enable auth and bind to all interfaces
 CONF=/etc/mongodb.conf
 sed -i "s|^#auth.*|auth = true|" $CONF
 sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 
-pecl install mongo
+pecl install mongodb
 
 CONF=$WEBROOT/config.php
 sed -i "s|\[\"mongo_auth\"\].*|[\"mongo_auth\"] = true;|" $CONF
@@ -36,6 +48,7 @@ cat >$WEBROOT/app/configs/rplugin.php<<EOF
 EOF
 
 chown -R root:root $WEBROOT
+chown -R mongodb:mongodb /var/lib/mongodb
 
 lighty-enable-mod fastcgi || true
 lighty-enable-mod fastcgi-php || true
