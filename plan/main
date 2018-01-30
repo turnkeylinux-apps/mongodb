@@ -2,13 +2,13 @@
 
 mongodb
 
-php5-mongo
+php-mongodb
 
 python-pymongo
 ipython
 
 lighttpd
-php5-cgi
+php-cgi
 
 php-pear
 
