@@ -7,14 +7,6 @@ dl() {
 
 [ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY
 
-WEBROOT=/var/www/rockmongo
-
-git clone https://github.com/iwind/rockmongo.git $WEBROOT
-
-# ensure empty directory for git-clone
-rm -f $WEBROOT/app/plugins/README.txt
-
-git clone https://github.com/iwind/rockmongoplugins.git /var/www/rockmongo/app/plugins
 git clone https://github.com/mongodb/mongo-php-driver /usr/local/src/mongo-php-driver
 
 unset HTTP_PROXY

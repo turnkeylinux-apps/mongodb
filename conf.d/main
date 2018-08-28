@@ -4,7 +4,6 @@ ADMIN_NAME=admin
 ADMIN_PASS=$(mcookie)
 
 SRC=/usr/local/src
-WEBROOT=/var/www/rockmongo
 
 # mongodb: create admin user before enabling auth
 service mongodb start
@@ -36,22 +35,9 @@ sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 
 pecl install mongodb
 
-CONF=$WEBROOT/config.php
-sed -i "s|\[\"mongo_auth\"\].*|[\"mongo_auth\"] = true;|" $CONF
-
-cat >$WEBROOT/app/configs/rplugin.php<<EOF
-<?php
-\$plugins["mapreduce"]["enabled"] = 1;
-\$plugins["sharding"]["enabled"] = 1;
-\$plugins["systemjs"]["enabled"] = 1;
-?>
-EOF
-
-chown -R root:root $WEBROOT
 chown -R mongodb:mongodb /var/lib/mongodb
 
-lighty-enable-mod fastcgi || true
-lighty-enable-mod fastcgi-php || true
-lighty-disable-mod ssl || true
-lighty-enable-mod rockmongo
-
+systemctl enable php-fastcgi
+mkdir -p /var/run/nginx
+chown root:www-data /var/run/nginx
+chmod 770 /var/run/nginx
