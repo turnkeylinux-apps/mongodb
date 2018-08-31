@@ -7,8 +7,9 @@ php-mongodb
 python-pymongo
 ipython
 
-lighttpd
 php-cgi
 
 php-pear
+php-dev
 
+nginx
