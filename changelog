@@ -2,10 +2,22 @@ turnkey-mongodb-15.0 (1) turnkey; urgency=low
 
   * Install latest Debian Stretch MongoDB package
 
+  * Remove RockMongo (webUI) as not supported by PHP7.0 and hasn't had update
+    for years. Currently shipping with no UI.
+
+  * Include Python3 bindings and iPython3 only (default py2 support removed).
+
+  * Include mongo-tools (Debian package).
+
+  * Update to mongodb PHP driver (supports PHP7.0+).
+
+  * Use Nginx web server (replaces LigHTTPd) and provide landing page (aka
+    tklweb-cp) with links to UIs.
+
   * Note: Please refer to turnkey-core's changelog for changes common to all
     appliances. Here we only describe changes specific to this appliance.
 
- -- Stefan Davis <stefan@turnkeylinux.org>  Thu, 11 Jan 2018 21:42:16 +1100
+ -- Stefan Davis <stefan@turnkeylinux.org>  Tue, 11 Sep 2018 14:12:16 +1000
 
 turnkey-mongodb-14.2 (1) turnkey; urgency=low
 
