@@ -53,7 +53,9 @@
                           (to disable: rm /var/www/phpinfo.php)
                         </li>
                         <li><a href="https://www.turnkeylinux.org/mongodb">TurnKey appliance release notes</a></li>
-                        <li><a href="http://docs.mongodb.com">MongoDB Docs</a></li>
+                        <li><a href="https://docs.mongodb.com">MongoDB Docs</a></li>
+                        <li><a href="https://www.guru99.com/top-20-mongodb-tools.html">"20 Best MongoDB GUI Tools in 2018"
+                             - www.guru99.com (example of some MongoDB UI tools)</a></li>
                     </ul>
 
                 </div>
