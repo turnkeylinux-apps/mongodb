@@ -33,8 +33,6 @@ CONF=/etc/mongodb.conf
 sed -i "s|^#auth.*|auth = true|" $CONF
 sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
 
-pecl install mongodb
-
 chown -R mongodb:mongodb /var/lib/mongodb
 
 systemctl enable php-fastcgi

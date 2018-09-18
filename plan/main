@@ -4,12 +4,11 @@ mongodb
 
 php-mongodb
 
-python-pymongo
-ipython
+mongo-tools
+
+python3-pymongo
+ipython3
 
 php-cgi
-
-php-pear
-php-dev
 
 nginx
