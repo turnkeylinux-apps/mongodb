@@ -1,10 +1,6 @@
 #include <turnkey/base>
 
-mongodb
-
 php-mongodb
-
-mongo-tools
 
 python3-pymongo
 ipython3

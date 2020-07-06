@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Set MongoDB admin password
 
 Option:
@@ -13,20 +13,20 @@ import re
 import os
 
 from dialog_wrapper import Dialog
-from executil import ExecError, system
+import subprocess
 
 def usage(s=None):
     if s:
-        print >> sys.stderr, "Error:", s
-    print >> sys.stderr, "Syntax: %s [options]" % sys.argv[0]
-    print >> sys.stderr, __doc__
+        print("Error:", s, file=sys.stderr)
+    print("Syntax: %s [options]" % sys.argv[0], file=sys.stderr)
+    print(__doc__, file=sys.stderr)
     sys.exit(1)
 
 def main():
     try:
         opts, args = getopt.gnu_getopt(sys.argv[1:], "h",
                                        ['help', 'pass='])
-    except getopt.GetoptError, e:
+    except getopt.GetoptError as e:
         usage(e)
 
     new_pass = ""
@@ -45,10 +45,9 @@ def main():
             "MongoDB Password",
             "Enter new password for the MongoDB 'admin' account.")
 
-    escaped_pass = re.escape(new_pass)
-    script = os.path.dirname(__file__)+'/mongodb.sh'
-    system(script, escaped_pass)
-    print "Set new password for admin user."
+    script = os.path.join(os.path.dirname(__file__), 'mongodb.sh')
+    subprocess.run([script, new_pass])
+    print("Set new password for admin user.")
 
 
 if __name__ == "__main__":
