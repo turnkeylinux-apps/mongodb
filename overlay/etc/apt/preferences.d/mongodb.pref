@@ -1,0 +1,23 @@
+Package: *
+Pin: origin repo.mongodb.org
+Pin-Priority: 10
+
+Package: mongodb-org
+Pin: origin repo.mongodb.org
+Pin-Priority: 500
+
+Package: mongodb-org-tools
+Pin: origin repo.mongodb.org
+Pin-Priority: 500
+
+Package: mongodb-org-server
+Pin: origin repo.mongodb.org
+Pin-Priority: 500
+
+Package: mongodb-org-mongos
+Pin: origin repo.mongodb.org
+Pin-Priority: 500
+
+Package: mongodb-org-shell
+Pin: origin repo.mongodb.org
+Pin-Priority: 500

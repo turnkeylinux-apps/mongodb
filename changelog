@@ -1,3 +1,12 @@
+turnkey-mongodb-16.0 (1) turnkey; urgency=low
+
+  * Install latest MongoDB package from upstream 3rd party apt repos.
+
+  * Note: Please refer to turnkey-core's changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Stefan Davis <stefan@turnkeylinux.org>  Mon, 06 Jul 2020 13:15:07 +1000
+
 turnkey-mongodb-15.0 (1) turnkey; urgency=low
 
   * Install latest Debian Stretch MongoDB package

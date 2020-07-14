@@ -5,8 +5,13 @@ ADMIN_PASS=$(mcookie)
 
 SRC=/usr/local/src
 
+wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
+apt update
+apt install -y mongodb-org
+
 # mongodb: create admin user before enabling auth
-service mongodb start
+/usr/bin/mongod --config /etc/mongod.conf&
+PID=$!
 # wait for mongdb to start
 MONGO_PORT=27017
 CURL="curl --output /dev/null --silent"
@@ -26,12 +31,13 @@ EOF
 
 #mongo admin --eval "db.addUser(\"admin\", \"$ADMIN_PASS\")"
 mongo admin --eval "$user_doc"
-service mongodb stop
+kill $PID
+tail --pid=$PID -f /dev/null
 
 # mongodb: enable auth and bind to all interfaces
-CONF=/etc/mongodb.conf
-sed -i "s|^#auth.*|auth = true|" $CONF
-sed -i "s|^bind_ip.*|bind_ip = 0.0.0.0|" $CONF
+CONF=/etc/mongod.conf
+sed -i "s|^\(\s*\)authorization.*|\1auth = true|" $CONF
+sed -i "s|^\(\s*\)bindIp.*|\1bindIp: 0.0.0.0|" $CONF
 
 chown -R mongodb:mongodb /var/lib/mongodb
 
@@ -39,3 +45,6 @@ systemctl enable php-fastcgi
 mkdir -p /var/run/nginx
 chown root:www-data /var/run/nginx
 chmod 770 /var/run/nginx
+
+chown -R mongodb:mongodb /var/lib/mongodb
+chown -R mongodb:mongodb /var/log/mongodb
