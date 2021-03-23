@@ -5,7 +5,7 @@ ADMIN_PASS=$(mcookie)
 
 SRC=/usr/local/src
 
-wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
+wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
 apt update
 apt install -y mongodb-org
 

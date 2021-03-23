@@ -1,3 +1,12 @@
+turnkey-mongodb-16.1 (1) turnkey; urgency=low
+
+  * Install latest MongoDB package from upstream 3rd party apt repos: 4.4
+
+  * Note: Please refer to turnkey-core's 16.1 changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Stefan Davis <stefan@turnkeylinux.org>  Tue, 23 Mar 2021 17:45:11 +1100
+
 turnkey-mongodb-16.0 (1) turnkey; urgency=low
 
   * Install latest MongoDB package from upstream 3rd party apt repos.
