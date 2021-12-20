@@ -2,7 +2,7 @@
 
 ADMIN_NAME=admin
 ADMIN_PASS=$(mcookie)
-
+USER=mongodb
 SRC=/usr/local/src
 
 wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
@@ -41,10 +41,10 @@ sed -i "s|^\(\s*\)bindIp.*|\1bindIp: 0.0.0.0|" $CONF
 
 chown -R mongodb:mongodb /var/lib/mongodb
 
-systemctl enable php-fastcgi
-mkdir -p /var/run/nginx
-chown root:www-data /var/run/nginx
-chmod 770 /var/run/nginx
+# systemctl enable php-fastcgi
+# mkdir -p /var/run/nginx
+# chown root:www-data /var/run/nginx
+# chmod 770 /var/run/nginx
 
 chown -R mongodb:mongodb /var/lib/mongodb
 chown -R mongodb:mongodb /var/log/mongodb
