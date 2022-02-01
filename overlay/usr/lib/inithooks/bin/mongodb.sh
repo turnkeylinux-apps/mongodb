@@ -9,5 +9,5 @@ echo "resetting 'admin' password"
 mongo admin --eval "db.changeUserPassword(\"admin\",\"$1\");" --quiet
 echo "killing mongod process and restarting service"
 mongod --dbpath /var/lib/mongodb --shutdown --quiet
-service mongod start
+service mongod restart
 

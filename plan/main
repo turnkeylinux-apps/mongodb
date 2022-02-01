@@ -1,10 +1,8 @@
 #include <turnkey/base>
 
-php-mongodb
-
+build-essential # needed by node-gyp for packages with native bindings (e.g., node-inspector)
+ca-certificates
+openssl
 python3-pymongo
 ipython3
-
-php-cgi
-
 nginx

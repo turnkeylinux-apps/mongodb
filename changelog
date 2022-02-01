@@ -1,3 +1,17 @@
+turnkey-mongodb-17.0 (1) turnkey; urgency=low
+
+  * Install latest MongoDB package from upstream 3rd party apt repos: 5.0
+
+  * Move from using php-fpm to nodejs common with pm2.
+
+  * Include Mongo-Express GUI tool
+
+  * Note: Please refer to turnkey-core's 17.0 changelog for changes common to all
+    appliances. Here we only describe changes specific to this appliance.
+
+ -- Zhenya Hvorostian <zhenya@turnkeylinux.org>  Fri, 21 Jan 2022 00:02:11 +0300
+
+
 turnkey-mongodb-16.1 (1) turnkey; urgency=low
 
   * Install latest MongoDB package from upstream 3rd party apt repos: 4.4
