@@ -19,7 +19,7 @@ and on top of that:
    - Includes mongo-tools_ (via package management) - a collection of tools for
      administering MongoDB servers.
    - Includes MongoDB PHP7.0 bindings (mongodb_). Note, for use with PHP, you
-     may wish to also install the MongoDB PHP Library_
+     may wish to also install the `MongoDB PHP Library`_
    - Includes MongoDB Python3 bindings and iPython3.
    - Includes mongo-express_ admin GUI tool.
    - Bundled with Nginx webserver.
