@@ -61,15 +61,24 @@ def main():
 
 
     subprocess.run(['sed', '-i', 's|\"ME_CONFIG_BASICAUTH_PASSWORD\": \".*\"|\"ME_CONFIG_BASICAUTH_PASSWORD\": \"%s\"|'  % ui_pass, "/opt/tklweb-cp/ecosystem.config.js"])
-    subprocess.run(['pm2', 'reload', '/opt/tklweb-cp/ecosystem.config.js', '--update-env'],env={"PM2_HOME": "/home/node/.pm2", "PATH": "/usr/local/bin"}, check=True, user="node")
-    subprocess.run(['service', 'pm2', 'restart'], shell=True)
-    subprocess.run(['pm2', 'save'],env={"PM2_HOME": "/home/node/.pm2", "PATH": "/usr/local/bin"}, check=True, user="node")
+
+
     script = os.path.join(os.path.dirname(__file__), 'mongodb.sh')
     subprocess.run([script, new_pass])
     print("Set new password for admin user.")
 
+    # reload and restart pm2 so changes take affect
+    # and save them to /home/node/.pm2/dump.pm2
+    try:
+        subprocess.run(["systemctl", "is-active",
+                        "--quiet", "pm2-node.service"])
+        subprocess.run(["systemctl", "daemon-reload"])
+        subprocess.run(["pm2", "reload", "/opt/tklweb-cp/ecosystem.config.js"],env={"PM2_HOME": "/home/node/.pm2", "PATH": "/usr/local/bin"}, check=True, user="node")
+        subprocess.run(["pm2", "save"],env={"PM2_HOME": "/home/node/.pm2", "PATH": "/usr/local/bin"}, check=True, user="node")
+        subprocess.run(["service", "pm2-node", "restart"])
+    except ExecError:
+        pass
 
 if __name__ == "__main__":
     main()
-
 
