@@ -1,10 +1,6 @@
 #include <turnkey/base>
+#include <turnkey/nodejs>
 
-php-mongodb
-
+ca-certificates
 python3-pymongo
 ipython3
-
-php-cgi
-
-nginx

@@ -21,13 +21,8 @@ and on top of that:
    - Includes MongoDB PHP7.0 bindings (mongodb_). Note, for use with PHP, you
      may wish to also install the `MongoDB PHP Library`_
    - Includes MongoDB Python3 bindings and iPython3.
+   - Includes mongo-express_ admin GUI tool.
    - Bundled with Nginx webserver.
-
-- Note: as of v15.0 this appliance no longer ships with a built-in Mongo UI
-  for web based administration (previous versions had RockMongo). Unfortunately
-  RockMongo is no longer maintained and not compatible with PHP7.0. There are
-  numerous UI options avaialble, some suggestions are provided on the applaince
-  landing page.
 
 - Postfix MTA (bound to localhost) to allow sending of email (e.g.,
   password recovery).
@@ -37,9 +32,11 @@ Credentials *(passwords set at first boot)*
 -------------------------------------------
 
 -  Webmin, SSH: username **root**
+-  Mongo-Express: username **admin**
 
 .. _Mongo DB: https://www.mongodb.org/
 .. _TurnKey Core: https://www.turnkeylinux.org/core
 .. _mongo-tools: https://github.com/mongodb/mongo-tools
 .. _mongodb: https://secure.php.net/mongodb
-.. _mongo-php-library: https://github.com/mongodb/mongo-php-library
+.. _mongo-express: https://github.com/mongo-express/mongo-express
+.. _MongoDB PHP Library: https://github.com/mongodb/mongo-php-library

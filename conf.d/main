@@ -3,9 +3,13 @@
 ADMIN_NAME=admin
 ADMIN_PASS=$(mcookie)
 
-SRC=/usr/local/src
+MONGOUSER=mongodb
+NODEUSER=node
 
-wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
+SRC=/usr/local/src
+NODEAPP=/opt/tklweb-cp
+
+wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | gpg --dearmor > /usr/share/keyrings/mongodb.gpg
 apt update
 apt install -y mongodb-org
 
@@ -39,12 +43,25 @@ CONF=/etc/mongod.conf
 sed -i "s|^\(\s*\)authorization.*|\1auth = true|" $CONF
 sed -i "s|^\(\s*\)bindIp.*|\1bindIp: 0.0.0.0|" $CONF
 
-chown -R mongodb:mongodb /var/lib/mongodb
+chown -R $MONGOUSER:$MONGOUSER /var/lib/mongodb
 
-systemctl enable php-fastcgi
 mkdir -p /var/run/nginx
 chown root:www-data /var/run/nginx
 chmod 770 /var/run/nginx
 
-chown -R mongodb:mongodb /var/lib/mongodb
-chown -R mongodb:mongodb /var/log/mongodb
+chown -R $MONGOUSER:$MONGOUSER /var/lib/mongodb
+chown -R $MONGOUSER:$MONGOUSER /var/log/mongodb
+
+su -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && npm i mongo-express" $NODEUSER
+su -lc "[ "$FAB_HTTP_PROXY" ] && export HTTP_PROXY=$FAB_HTTP_PROXY; cd /opt/tklweb-cp && pm2 start ecosystem.config.js && sleep 5 && pm2 save && pm2 kill" $NODEUSER
+
+cp $NODEAPP/node_modules/mongo-express/config.default.js  $NODEAPP/node_modules/mongo-express/config.js
+ 
+# remove env fetching variable
+sed -i "s| process.env.ME_CONFIG.SITE_SSL_ENABLED \|\|||" $NODEAPP/node_modules/mongo-express/config.js 
+
+systemctl enable mongod.service
+rm -f /etc/nginx/sites-enabled/*default
+ln -s /etc/nginx/sites-available/mongodb /etc/nginx/sites-enabled/mongodb
+
+rm -rf /tmp/npm*
